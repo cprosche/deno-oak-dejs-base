@@ -1,5 +1,5 @@
 import { Router } from "https://deno.land/x/oak@v10.5.1/mod.ts";
-import { dejs } from "./dejs.js";
+import { dejs } from "./utils/dejs.js";
 const router = new Router();
 
 router.get("/", async ({ response }) => {
