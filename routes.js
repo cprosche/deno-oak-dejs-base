@@ -6,14 +6,10 @@ router.get("/", async ({ response }) => {
 	response.body = await dejs("index.ejs");
 });
 
-router.get("/about", async ({ response }) => {
-	response.body = await dejs("about.ejs");
-});
-
 //serves static files such as styles.css
 router.get("/static/:path+", async (context) => {
 	await context.send({
-		root: Deno.cwd(),
+		root: Deno.cwd()
 	});
 });
 
