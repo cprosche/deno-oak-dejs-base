@@ -1,6 +1,5 @@
-// deno-lint-ignore-file
 import { Application } from "https://deno.land/x/oak@v10.5.1/mod.ts";
-import router from "./routes.ts";
+import router from "./routes.js";
 
 const port = 3000;
 
