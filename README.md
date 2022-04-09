@@ -4,5 +4,5 @@ Site files use [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/i
 
 Start the server on your machine using this command.
 ```
-deno run --allow-net --allow-read server.ts
+deno run --allow-net --allow-read server.js
 ```
