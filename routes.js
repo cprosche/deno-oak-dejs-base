@@ -9,8 +9,13 @@ router.get("/", async ({ response }) => {
 //serves static files such as styles.css
 router.get("/static/:path+", async (context) => {
 	await context.send({
-		root: Deno.cwd()
+		root: Deno.cwd(),
 	});
+});
+
+router.all("/(.*)", async ({response}) => {
+	response.status = 404;
+	response.body = await dejs("404.ejs");
 });
 
 export default router;
