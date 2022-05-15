@@ -1,24 +1,42 @@
-version: "3.9"
+version: "2"
 services:
-  nginx-proxy: 
-    image: "nginxproxy/nginx-proxy"
-    ports: 
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    ports:
       - "80:80"
       - "443:443"
-    volumes: 
-      - certs:/etc/nginx/certs
+    volumes:
+      - conf:/etc/nginx/conf.d
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
-  nginx-proxy-acme: 
+    network_mode: bridge
+
+  acme-companion:
     image: nginxproxy/acme-companion
-    volumes: 
-      - nginx-proxy:/var/run/docker.sock:/var/run/docker.sock:ro
-      - acme:/etc/acme.sh
+    container_name: nginx-proxy-acme
     environment:
       - DEFAULT_EMAIL=caderosche@gmail.com
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    network_mode: bridge
+
   deno-app:
     image: cprosche/deno-app:latest
     environment:
       - VIRTUAL_HOST=theunitseo.com,www.theunitseo.com
       - LETSENCRYPT_HOST=theunitseo.com,www.theunitseo.com
+    network_mode: bridge
+
+volumes:
+  conf:
+  vhost:
+  html:
+  certs:
+  acme:
