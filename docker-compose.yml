@@ -41,8 +41,8 @@ services:
   deno-app:
     image: cprosche/deno-app:latest
     environment:
-      - VIRTUAL_HOST=theunitseo.com,www.theunitseo.com
-      - LETSENCRYPT_HOST=theunitseo.com,www.theunitseo.com
+      - VIRTUAL_HOST=testing.caderosche.com
+      - LETSENCRYPT_HOST=testing.caderosche.com
     network_mode: bridge
     restart: always
 
